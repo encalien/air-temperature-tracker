@@ -1,17 +1,8 @@
-import { useEffect, useState } from "react";
 import TemperatureRecord from "../types/TemperatureRecord";
-import { mockApi } from "../MockApi";
 
-const api = mockApi();
-
-export default function TemperatureRecordIndex() {
-  const [temperatureRecords, setTemperatureRecords] = useState<TemperatureRecord[]>([]);
-
-  useEffect(() => {
-    api.getTemperaturesDuring(0, Date.now())
-      .then((records: TemperatureRecord[]) => setTemperatureRecords(records));
-  }, []);
-
+export default function TemperatureRecordIndex(
+  { temperatureRecords }: { temperatureRecords: TemperatureRecord[] }
+) {
   return (
     <div>
       <table>

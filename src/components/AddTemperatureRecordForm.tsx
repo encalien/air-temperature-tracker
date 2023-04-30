@@ -1,18 +1,25 @@
-import { mockApi } from "../MockApi";
+import temperatureRecordService from "../services/TemperatureRecordService";
+import TemperatureRecord from "../types/TemperatureRecord";
 
-const api = mockApi();
-
-export default function AddTemperatureRecordForm() {
+export default function AddTemperatureRecordForm(
+  { addTemperatureRecord }: { addTemperatureRecord: Function }
+) {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     if (!formData) return;
     
-    const location: string = formData.get('location') as string;
     const time: number = new Date(formData.get('date') as string).valueOf();
+    const location: string = formData.get('location') as string;
     const temperature: number = Math.round((+(formData.get('temperature') as string) + 273) * 10) / 10;
 
-    api.saveTemperature(location, time, temperature);
+    temperatureRecordService.submitTemperatureRecord({ time, location, temperature })
+      .then((record: TemperatureRecord) => {
+        console.log('Record added:', record);
+        addTemperatureRecord(record);
+      }).catch((error: Error) => {
+        console.error('Error:', error);
+      });
   }
 
   return (
