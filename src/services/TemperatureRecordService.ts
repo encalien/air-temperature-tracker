@@ -26,6 +26,18 @@ const temperatureRecordService = {
           reject(error);
         });
     });
+  },
+
+  autocompleteLocation: (input: string): Promise<string[]> => {
+    return new Promise((resolve, reject) => {
+      api.autocompleteLocation(input)
+        .then((locations: string[]) => {
+          resolve(locations);
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
   }
 };
 

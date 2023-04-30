@@ -191,6 +191,10 @@ export function mockApi() {
   const locationsSet = new Set(storage.temperatureRecords.map((record) => record.location))
   const locations = Array.from(locationsSet)
 
+  const updateLocationsList = (location: string) => {
+    if (!locations.includes(location)) locations.push(location)
+  }
+
   return {
       async autocompleteLocation(input: string) {
           await networkDelay(Math.min(500 / input.length, 1000))
@@ -206,6 +210,7 @@ export function mockApi() {
       async saveTemperature(location: string, time: number, temperature: number) {
           await networkDelay(100)
           storage.temperatureRecords.push({ location, time, temperature })
+          updateLocationsList(location)
           return 'saved'
       },
   }
