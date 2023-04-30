@@ -43,11 +43,13 @@ export default function StatisticsOverview(
     const temperatureOccurrenceMap: { [key: string]: number } = {};
     const modeList: number[] = [];
 
+    // count occurrences of each temperature
     temperatureRecords.forEach((temperatureRecord: TemperatureRecord) => {
       const temperature = temperatureRecord.temperature.toString();
       temperatureOccurrenceMap[temperature] = (temperatureOccurrenceMap[temperature] || 0) + 1;
     });
 
+    // find the highest occurrence count
     let maxOccurenceCount = 0;
     Object.keys(temperatureOccurrenceMap).forEach((temperature: string) => {
       const occurrenceCount = temperatureOccurrenceMap[temperature];
@@ -56,6 +58,10 @@ export default function StatisticsOverview(
       }
     });
 
+    // if all values occur only once, there is no mode
+    if (maxOccurenceCount === 1) return;
+
+    // if there are multiple modes, add them all to the list
     Object.entries(temperatureOccurrenceMap).forEach((entry: [string, number]) => {
       if (entry[1] === maxOccurenceCount) {
         const temperatureInCelsius = Math.round((+entry[0] - 273) * 10) / 10;
@@ -63,7 +69,7 @@ export default function StatisticsOverview(
       }
     });
 
-    setTemperatureModes(modeList);
+    setTemperatureModes(modeList.sort((a, b) => a - b));
   }
 
   useEffect(() => {
@@ -83,7 +89,9 @@ export default function StatisticsOverview(
         <p>Cold days: {coldDaysCount}</p>
         <p>Hot days: {hotDaysCount}</p>
         <p>Days above average: {daysAboveAverageCount}</p>
-        <p>Temperature mode:</p>
+        <p>Temperature mode{temperatureModes.length > 1 && 's'}:
+          {!temperatureModes.length && <span> /</span>}
+        </p>
         <ul>
           {temperatureModes.map((temperature: number, i: number) => (
             <li key={i}>{temperature} °C</li>
