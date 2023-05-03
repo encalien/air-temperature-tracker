@@ -19,7 +19,7 @@ export default function AutocompleteInput(
   }
 
   const debouncedStartAutocomplete = useCallback(
-    UtilsService.debounce((value: string) => startAutocomplete(value), 2000),
+    UtilsService.debounce((value: string) => startAutocomplete(value), 500),
     []
   );
 
