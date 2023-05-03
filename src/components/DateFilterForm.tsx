@@ -1,3 +1,5 @@
+import { toast } from 'react-toastify';
+
 export default function DateFilterForm(
   { filterByDate }: { filterByDate: Function }
 ) {
@@ -11,6 +13,13 @@ export default function DateFilterForm(
     const startDate: number = new Date(formData.get('startDate') as string).valueOf();
     const endDate: number = new Date(formData.get('endDate') as string).valueOf();
 
+    if (startDate > endDate) {
+      toast.error("Start date must be before end date");
+      return;
+    } else if (startDate === endDate) {
+      toast.error("Start date and end date cannot be the same");
+      return;
+    }
     filterByDate(startDate, endDate);
   }
 
