@@ -1,11 +1,27 @@
 import { useCallback, useState } from 'react';
 import { toast } from 'react-toastify';
+import UtilsService from '../services/UtilsService';
 
 export default function AutocompleteInput(
   { inputName, onSuggestionSelect, autocompleteText }: { inputName: string, onSuggestionSelect: Function, autocompleteText: Function }
 ) {
   const [inputValue, setInputValue] = useState('');
   const [suggestions, setSuggestions] = useState<string[]>([]);
+
+  const startAutocomplete = (value: string) => {
+    autocompleteText(value)
+      .then((suggestions: string[]) => {
+        setSuggestions(suggestions);
+      })
+      .catch((error: any) => {
+        toast(error);
+      });
+  }
+
+  const debouncedStartAutocomplete = useCallback(
+    UtilsService.debounce((value: string) => startAutocomplete(value), 2000),
+    []
+  );
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
@@ -18,15 +34,7 @@ export default function AutocompleteInput(
     const capitalizedValue = value[0].toUpperCase() + value.slice(1);
     setInputValue(capitalizedValue);
 
-    const timeoutId = setTimeout(() => {
-      autocompleteText(capitalizedValue).then((suggestions: string[]) => {
-        setSuggestions(suggestions);
-      })
-      .catch((error: any) => {
-        toast(error);
-      });
-    }, 1000);
-    return () => clearTimeout(timeoutId);
+    debouncedStartAutocomplete(capitalizedValue);
   }
 
   const handleSelect = useCallback(
