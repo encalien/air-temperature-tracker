@@ -1,6 +1,13 @@
-# Getting Started with Create React App
+# Air Temperature Tracker
 
+This project is a simple single page application that displays readings of air temperature at different times and locations, as well as some basic statistics. Users can add new air temperature records, and filter the displayed records and statistics by date.
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## Local Setup
+
+To run the project locally, clone the project from github and inside the project directory run:
+
+### `npm install`
 
 ## Available Scripts
 
