@@ -1,10 +1,13 @@
 import temperatureRecordService from "../services/TemperatureRecordService";
 import TemperatureRecord from "../types/TemperatureRecord";
 import AutocompleteInput from "./AutocompleteInput";
+import { toast } from 'react-toastify';
 
 export default function AddTemperatureRecordForm(
   { addTemperatureRecord }: { addTemperatureRecord: Function }
 ) {
+  const today = new Date().toISOString().split("T")[0];
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
@@ -16,10 +19,11 @@ export default function AddTemperatureRecordForm(
 
     temperatureRecordService.submitTemperatureRecord({ time, location, temperature })
       .then((record: TemperatureRecord) => {
-        console.log('Record added:', record);
         addTemperatureRecord(record);
-      }).catch((error: Error) => {
-        console.error('Error:', error);
+        toast.success("New air temperature record added successfully!");
+      })
+      .catch((error) => {
+        toast.error(error.message);
       });
   }
 
@@ -34,7 +38,7 @@ export default function AddTemperatureRecordForm(
       <form onSubmit={handleSubmit} className="flex-container">
         <div className="flex-item form-group">
           <label htmlFor="date">Date</label>
-          <input required type="date" id="date" name="date" />
+          <input required type="date" id="date" name="date" max={today}/>
         </div>
         <div className="flex-item form-group">
           <label htmlFor="location">Location</label>

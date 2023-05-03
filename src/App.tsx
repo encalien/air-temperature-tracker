@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import './styles/main.css';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify';
 import AddTemperatureRecordForm from './components/AddTemperatureRecordForm';
 import TemperatureRecordIndex from './components/TemperatureRecordIndex';
 import TemperatureRecord from './types/TemperatureRecord';
@@ -13,10 +15,11 @@ function App() {
   const fetchTemperatureRecordsBetween = (startDate: number, endDate: number) => {
     temperatureRecordService.getTemperatureRecordsBetween(startDate, endDate)
       .then((records: TemperatureRecord[]) => {
-        console.log('Records fetched:', records)
         setTemperatureRecords(records);
       })
-      .catch((error) => console.log('Error:', error));
+      .catch((error) => {
+        toast.error(error.message);
+      });
   }
 
   const addTemperatureRecord = (record: TemperatureRecord): void => {
@@ -31,6 +34,7 @@ function App() {
 
   return (
     <div className="main-container">
+      <ToastContainer />
       <h1>Air Temperature Tracker</h1>
       <AddTemperatureRecordForm addTemperatureRecord={addTemperatureRecord} />
       <h2>Statistics</h2>

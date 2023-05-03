@@ -1,4 +1,5 @@
 import { useCallback, useState } from 'react';
+import { toast } from 'react-toastify';
 
 export default function AutocompleteInput(
   { inputName, onSuggestionSelect, autocompleteText }: { inputName: string, onSuggestionSelect: Function, autocompleteText: Function }
@@ -20,9 +21,9 @@ export default function AutocompleteInput(
     const timeoutId = setTimeout(() => {
       autocompleteText(capitalizedValue).then((suggestions: string[]) => {
         setSuggestions(suggestions);
-        console.log('Suggestions: ', suggestions);
-      }).catch((error: Error) => {
-        console.error('Error:', error);
+      })
+      .catch((error: any) => {
+        toast(error);
       });
     }, 1000);
     return () => clearTimeout(timeoutId);

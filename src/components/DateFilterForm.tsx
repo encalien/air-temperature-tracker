@@ -1,6 +1,8 @@
 export default function DateFilterForm(
   { filterByDate }: { filterByDate: Function }
 ) {
+  const today = new Date().toISOString().split("T")[0];
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
@@ -17,11 +19,11 @@ export default function DateFilterForm(
       <form onSubmit={handleSubmit} className="flex-container">
         <div className="flex-item form-group">
           <label htmlFor="startDate">Start Date</label>
-          <input required type="date" id="startDate" name="startDate" />
+          <input required type="date" id="startDate" name="startDate" max={today} />
         </div>
         <div className="flex-item form-group">
           <label htmlFor="endDate">End Date</label>
-          <input required type="date" id="endDate" name="endDate" />
+          <input required type="date" id="endDate" name="endDate" max={today} />
         </div>
         <div className="flex-container padding-0 flex-end">
           <button type="submit" className="btn">Filter</button>
