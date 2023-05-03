@@ -38,15 +38,15 @@ export default function AutocompleteInput(
   );
 
   return (
-    <div>
-      <input required type="text" id={inputName} name={inputName} value={inputValue} onChange={handleChange} />
-      <ul>
+    <div className="flex-item form-group">
+      <input required type="text" id={inputName} name={inputName} value={inputValue} autoComplete="off" onChange={handleChange} />
+      {!!suggestions.length && <ul>
         {suggestions.map((suggestion) => (
           <li key={suggestion} onClick={() => handleSelect(suggestion)}>
             {suggestion}
           </li>
         ))}
-      </ul>
+      </ul>}
     </div>
   );
 };

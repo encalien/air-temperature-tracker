@@ -1,0 +1,27 @@
+/* color definitions */
+:root {
+  --white: #ffffff;
+  --light: #C6C5CD;
+  --black: #181818;
+  --primary: #2733ba;
+  --primary-dark: #1b2487;
+}
+
+@media screen and (max-width: 768px) {
+  .flex-container {
+    flex-direction: column;
+  }
+
+  .layout-wrapper {
+    gap: 1rem;
+    align-items: center;
+  }
+  
+  .pagination {
+    flex-direction: row;
+  }
+
+  .statistics {
+    margin-right: 0;
+  }
+}

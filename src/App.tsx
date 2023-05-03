@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import './App.css';
+import './styles/main.css';
 import AddTemperatureRecordForm from './components/AddTemperatureRecordForm';
 import TemperatureRecordIndex from './components/TemperatureRecordIndex';
 import TemperatureRecord from './types/TemperatureRecord';
@@ -30,12 +30,15 @@ function App() {
   useEffect(() => fetchTemperatureRecordsBetween(0, Date.now()), []);
 
   return (
-    <div className="App">
+    <div className="main-container">
       <h1>Air Temperature Tracker</h1>
       <AddTemperatureRecordForm addTemperatureRecord={addTemperatureRecord} />
+      <h2>Statistics</h2>
       <DateFilterForm filterByDate={filterByDate} />
-      <StatisticsOverview temperatureRecords={temperatureRecords}/>
-      <TemperatureRecordIndex temperatureRecords={temperatureRecords} />
+      <div className="flex-container layout-wrapper">
+        <StatisticsOverview temperatureRecords={temperatureRecords}/>
+        <TemperatureRecordIndex temperatureRecords={temperatureRecords} />
+      </div>
     </div>
   );
 }

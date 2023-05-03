@@ -1,0 +1,143 @@
+@import './base.css';
+
+h1 {
+  text-align: center;
+}
+
+h2 {
+  font-size: 1.2rem;
+  margin-top: 3rem;
+}
+
+/* layout */
+.main-container {
+  margin: 2rem 3rem;
+}
+
+.flex-container {
+  display: flex;
+  gap: 10px;
+  padding: 1rem 0;
+}
+
+.flex-end {
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+.flex-center {
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.flex-item {
+  flex: 1 1 0;
+  height: 100%;
+}
+
+.padding-0 {
+  padding: 0;
+}
+
+.layout-wrapper {
+  gap: 2rem;
+}
+
+/* form */
+.form-group {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form-group input {
+  padding: 0.5rem;
+  border-radius: 5px;
+  border: 1px solid var(--light);
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #333;
+}
+
+.form-group ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  top: 2rem;
+  z-index: 1;
+  background-color: var(--white);
+  width: 100%;
+  border: 1px solid var(--light);
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.form-group ul li {
+  padding: 0.5rem;
+}
+
+.form-group ul li:hover {
+  background-color: var(--light);
+}
+
+.btn {
+  padding: 0.5rem;
+  border-radius: 5px;
+  border: none;
+  background-color: var(--primary);
+  color: var(--white);
+  cursor: pointer;
+  min-width: 80px;
+  border: 1px solid var(--primary);
+}
+
+.btn:hover {
+  background-color: var(--primary-dark);
+}
+
+/* Statistics */
+.statistics {
+  width: 250px;
+}
+
+.stat-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 0.5rem;
+  align-items: center;
+}
+
+.stat-value {
+  font-weight: bold;
+}
+
+/* Table */
+table {
+  width: 100%;
+}
+
+table thead {
+  background-color: var(--primary);
+  color: var(--white);
+}
+
+table thead th, td {
+  padding: 0.3rem 0.5rem;
+  text-align: left;
+  width: 33%;
+}

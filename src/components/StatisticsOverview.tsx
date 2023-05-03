@@ -82,21 +82,31 @@ export default function StatisticsOverview(
   }, [temperatureRecords]);
 
   return (
-    <div>
-      <h2>Statistics Overview</h2>
-      <div>
-        <p>Average temperature: {averageTemperature} °C</p>
-        <p>Cold days: {coldDaysCount}</p>
-        <p>Hot days: {hotDaysCount}</p>
-        <p>Days above average: {daysAboveAverageCount}</p>
-        <p>Temperature mode{temperatureModes.length > 1 && 's'}:
+    <div className="flex-container flex-column statistics">
+      <div className="stat-container">
+        <span>Average temperature</span>
+        <span className="stat-value">{averageTemperature} °C</span>
+      </div>
+      <div className="stat-container">
+        <span>Cold days</span>
+        <span className="stat-value">{coldDaysCount}</span>
+      </div>
+      <div className="stat-container">
+        <span>Hot days</span>
+        <span className="stat-value">{hotDaysCount}</span>
+      </div>
+      <div className="stat-container">
+        <span>Days above average</span>
+        <span className="stat-value">{daysAboveAverageCount}</span>
+      </div>
+      <div className="stat-container">
+        <span>Temperature mode{temperatureModes.length > 1 && 's'}</span>
+        <span className="stat-value flex-container padding-0 flex-center flex-wrap">
           {!temperatureModes.length && <span> /</span>}
-        </p>
-        <ul>
           {temperatureModes.map((temperature: number, i: number) => (
-            <li key={i}>{temperature} °C</li>
+            <span key={i}>{temperature} °C</span>
           ))}
-        </ul>
+        </span>
       </div>
     </div>
   );

@@ -30,18 +30,27 @@ export default function AddTemperatureRecordForm(
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="date">Date</label>
-        <input required type="date" id="date" name="date" />
-        <label htmlFor="location">Location</label>
-        <AutocompleteInput
-          inputName="location"
-          onSuggestionSelect={selectAutocompleteLocation}
-          autocompleteText={temperatureRecordService.autocompleteLocation}
-        />
-        <label htmlFor="temperature">Temperature in °C</label>
-        <input required type="number" step="0.1" id="temperature" name="temperature" />
-        <button type="submit">Add</button>
+      <h2>Add new temperature reading</h2>
+      <form onSubmit={handleSubmit} className="flex-container">
+        <div className="flex-item form-group">
+          <label htmlFor="date">Date</label>
+          <input required type="date" id="date" name="date" />
+        </div>
+        <div className="flex-item form-group">
+          <label htmlFor="location">Location</label>
+          <AutocompleteInput
+            inputName="location"
+            onSuggestionSelect={selectAutocompleteLocation}
+            autocompleteText={temperatureRecordService.autocompleteLocation}
+          />
+        </div>
+        <div className="flex-item form-group">
+          <label htmlFor="temperature">Temperature in °C</label>
+          <input required type="number" step="0.1" id="temperature" name="temperature" />
+        </div>
+        <div className="flex-container padding-0 flex-end">
+          <button type="submit" className="btn">Add</button>
+        </div>
       </form>
     </div>
   );

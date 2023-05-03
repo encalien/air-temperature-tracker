@@ -27,7 +27,7 @@ export default function TemperatureRecordIndex(
   }, [temperatureRecords, showAll]);
 
   return (
-    <div>
+    <div className="flex-item flex-container flex-column">
       <table>
         <thead>
           <tr>
@@ -46,8 +46,8 @@ export default function TemperatureRecordIndex(
           ))}
         </tbody>
       </table>
-      <button onClick={toggleShowAll}>{showAll ? 'Show less' : 'Show all'}</button>
-      <div>
+      <div className="flex-container flex-center flex-wrap pagination padding-0">
+        <button onClick={toggleShowAll}>{showAll ? 'Show less' : 'Show all'}</button>
         {Array.from(Array(pageCount).keys()).map((page: number) => (
           <button key={page} onClick={() => setPageTemperatureRecords(page)}>{page + 1}</button>
         ))}
